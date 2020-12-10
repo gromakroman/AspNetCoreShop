@@ -1,0 +1,16 @@
+﻿@model Tuple<int?, int>
+
+<div style="margin-left: @(Model.Item2*20)px">
+    @foreach (var category in ((List<AspNetCoreShop.Model.Category>)ViewBag.CategoryList).Where(c => c.ParentCategoryId == Model.Item1))
+    {
+        @if (ViewBag.CurentCategoryId == category.CategoryId)
+        {
+            <a asp-action="Category" asp-route-id="@category.CategoryId"><strong>@category.Name</strong></a>
+        }
+        else
+        {
+            <a asp-action="Category" asp-route-id="@category.CategoryId">@category.Name</a>
+        }
+        @await Html.PartialAsync("_SubMenu", Tuple.Create((int?)category.CategoryId, Model.Item2 + 1))
+    }
+</div>

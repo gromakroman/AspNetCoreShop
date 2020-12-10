@@ -1,0 +1,53 @@
+﻿@model IEnumerable<AspNetCoreShop.Model.BasketViewModel>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Price)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Count)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Amount)
+            </th>
+
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    <img src="~/images/@(item.Image == null ? "none.jpg" : item.Image)" style="height: 100px" />
+                    @*@Html.DisplayFor(modelItem => item.Image)*@
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Price)
+                </td>
+                <td>
+                    <a asp-action="BasketDec" asp-route-id="@item.BasketId"><strong>-</strong></a>
+                    @Html.DisplayFor(modelItem => item.Count)
+                    <a asp-action="BasketInc" asp-route-id="@item.BasketId"><strong>+</strong></a>
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Amount)
+                </td>
+                <td>
+                    <a asp-action="BasketDelete" asp-route-id="@item.BasketId">Удалить</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

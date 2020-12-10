@@ -1,0 +1,12 @@
+﻿@model IEnumerable<AspNetCoreShop.Model.Product>
+
+<div class="row">
+    @foreach (var product in Model)
+    {
+        <div class="col-3 mb-2">         
+            <div><a asp-action="Details" asp-route-id="@product.ProductId"><img src="~/images/@(product.Image == null ? "none.jpg" : product.Image)" style="max-width: 100%" /></a></div>
+            <div><a asp-action="Details" asp-route-id="@product.ProductId">@Html.DisplayFor(modelItem => product.Name)</a></div>
+            <div><span>@product.Price р.</span></div>
+        </div>
+    }
+</div>
